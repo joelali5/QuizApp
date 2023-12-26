@@ -1,11 +1,11 @@
-export default function ScoreBoard({points}) {
+export default function ScoreBoard({ points, highScore }) {
   return (
     <div className="scoreboard">
       <div className="highscore">
         <p className="highscore-icon">🏆</p>
         <p className="scoreboard-scores">
           <span>Highscore</span>
-          <span>348</span>
+          <span>{highScore}</span>
         </p>
       </div>
       <div className="stroke"></div>
@@ -13,7 +13,7 @@ export default function ScoreBoard({points}) {
         <p className="points-icon">🎉</p>
         <p className="scoreboard-scores">
           <span>Points</span>
-          <span>{points}</span>
+          <>{points * 4}</>
         </p>
       </div>
     </div>

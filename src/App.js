@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import Loader from "./components/Loader";
 import Error from "./components/Error";
 import NextButton from "./components/NextButton";
+import Finished from "./components/Finished";
 
 const options = {
   "General Knowledge": 9,
@@ -28,12 +29,13 @@ const options = {
 
 const initialState = {
   questions: [],
-  status: "loading",
+  status: "ready",
   amount: 5,
   difficulty: "easy",
   index: 0,
   answer: null,
   points: 0,
+  highScore: 0,
 };
 
 function reducer(state, action) {
@@ -63,6 +65,13 @@ function reducer(state, action) {
         answer: null,
         progress: state.progress + state.index,
       };
+    case "finish":
+      return {
+        ...state,
+        status: "finished",
+        highScore:
+          state.points > state.highScore ? state.points : state.highScore,
+      };
     default:
       throw new Error("Unknown action!");
   }
@@ -70,8 +79,18 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { questions, status, amount, difficulty, index, answer, points } =
-    state;
+  const {
+    questions,
+    status,
+    amount,
+    difficulty,
+    index,
+    answer,
+    points,
+    highScore,
+  } = state;
+
+  const numQuestions = questions.length;
 
   console.log(questions?.[index]);
 
@@ -79,13 +98,14 @@ function App() {
     <div className="app">
       <Header />
       <Main>
-        <StartScreen
-          options={options}
-          amount={amount}
-          dispatch={dispatch}
-          difficulty={difficulty}
-        />
-        {/* {status === "loading" && <Loader />} */}
+        {status === "ready" && (
+          <StartScreen
+            options={options}
+            amount={amount}
+            dispatch={dispatch}
+            difficulty={difficulty}
+          />
+        )}
         {status === "error" && <Error />}
         {status === "active" && questions.length !== 0 && (
           <Question
@@ -95,6 +115,7 @@ function App() {
             index={index}
             questions={questions}
             points={points}
+            highScore={highScore}
           />
         )}
         <div className="footer">
@@ -102,6 +123,14 @@ function App() {
           <NextButton questions={questions} index={index} dispatch={dispatch} />
         </div>
       </Main>
+
+      {status === "finished" && (
+        <Finished
+          points={points}
+          numQuestions={numQuestions}
+          highScore={highScore}
+        />
+      )}
     </div>
   );
 }

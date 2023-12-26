@@ -9,10 +9,11 @@ export default function Question({
   questions,
   points,
   index,
+  highScore
 }) {
   return (
     <div>
-      <ScoreBoard points={points} />
+      <ScoreBoard points={points} highScore={highScore} />
       <Progress
         index={index}
         questions={questions}

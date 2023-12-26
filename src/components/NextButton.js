@@ -10,4 +10,14 @@ export default function NextButton({ dispatch, answer, index, questions }) {
         Next
       </button>
     );
+
+    if (index === questions.length - 1)
+    return (
+      <button
+        className="btn"
+        onClick={() => dispatch({ type: "finish" })}
+      >
+        Finish
+      </button>
+    );
 }
