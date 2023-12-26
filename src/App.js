@@ -7,6 +7,7 @@ import Loader from "./components/Loader";
 import Error from "./components/Error";
 import NextButton from "./components/NextButton";
 import Finished from "./components/Finished";
+import Footer from "./components/Footer";
 
 const options = {
   "General Knowledge": 9,
@@ -108,29 +109,33 @@ function App() {
         )}
         {status === "error" && <Error />}
         {status === "active" && questions.length !== 0 && (
-          <Question
-            question={questions[index]}
-            dispatch={dispatch}
-            answer={answer}
-            index={index}
-            questions={questions}
+          <>
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+              index={index}
+              questions={questions}
+              points={points}
+              highScore={highScore}
+            />
+            <Footer>
+              <NextButton
+                questions={questions}
+                index={index}
+                dispatch={dispatch}
+              />
+            </Footer>
+          </>
+        )}
+        {status === "finished" && (
+          <Finished
             points={points}
+            numQuestions={numQuestions}
             highScore={highScore}
           />
         )}
-        <div className="footer">
-          <p className="timer">00:00</p>
-          <NextButton questions={questions} index={index} dispatch={dispatch} />
-        </div>
       </Main>
-
-      {status === "finished" && (
-        <Finished
-          points={points}
-          numQuestions={numQuestions}
-          highScore={highScore}
-        />
-      )}
     </div>
   );
 }
