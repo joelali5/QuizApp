@@ -4,11 +4,20 @@ export default function Finished({
   highScore,
   dispatch,
 }) {
+  const percent = ((points * 4) / (numQuestions * 5)) * 100;
+  let pointsExpression;
+  if (percent < 50)
+    pointsExpression = "Not so good score. You can do better 😔";
+  if (percent >= 50 && percent < 75)
+    pointsExpression = "Good score, but you can get even better 😁";
+  if (percent > 75) pointsExpression = "Amazing score 🎉";
+
   return (
     <div className="finished">
       <p>
-        You scored {points * 4} out of {numQuestions * 5} points
+        You scored {points * 4} out of {numQuestions * 5} points ({percent}%)
       </p>
+      <p>{pointsExpression}</p>
       <p>High Score is {highScore * 4}</p>
       <button className="btn" onClick={() => dispatch({ type: "restart" })}>
         Restart

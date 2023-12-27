@@ -3,7 +3,7 @@ import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
 import { useReducer } from "react";
 import Main from "./components/Main";
-import Loader from "./components/Loader";
+// import Loader from "./components/Loader";
 import Error from "./components/Error";
 import NextButton from "./components/NextButton";
 import Finished from "./components/Finished";
@@ -74,7 +74,12 @@ function reducer(state, action) {
           state.points > state.highScore ? state.points : state.highScore,
       };
     case "restart":
-      return { ...initialState, questions: state.questions, status: "ready" };
+      return {
+        ...initialState,
+        questions: state.questions,
+        status: "ready",
+        highScore: state.highScore * 4,
+      };
     default:
       throw new Error("Unknown action!");
   }
