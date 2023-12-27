@@ -95,8 +95,10 @@ p {
 
 .category-img {
   width: 120px;
+  height: 120px;
   margin: 0 auto;
   margin-top: -35px;
+  border-radius: 100px;
 }
 
 .category-name,

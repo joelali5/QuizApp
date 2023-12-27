@@ -1,4 +1,22 @@
 export default function Category({ options, amount, dispatch, difficulty }) {
+  const images = [
+    "general-knowledge",
+    "film",
+    "music",
+    "video_games",
+    "science&nature",
+    "desktop",
+    "maths",
+    "sports",
+    "geo",
+    "history",
+    "politics",
+    "art",
+    "celebrities",
+    "animals",
+    "vehicles",
+    "gadgets",
+  ];
   async function handleFetchQuiz(category) {
     try {
       const res = await fetch(
@@ -19,7 +37,11 @@ export default function Category({ options, amount, dispatch, difficulty }) {
           key={i}
           onClick={() => handleFetchQuiz(Number(options[category]))}
         >
-          <img src="basketball.png" alt="Category" className="category-img" />
+          <img
+            src={`${images[i]}.png`}
+            alt="Category"
+            className="category-img"
+          />
           <div className="category-btn-details">
             <p className="category-name">{category}</p>
             <p className="num-questions">{amount} questions</p>
