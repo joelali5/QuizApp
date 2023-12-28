@@ -28,6 +28,7 @@ const options = {
   Gadgets: 30,
 };
 const SECS_PER_QUESTION = 30;
+const POINT_VAL = 4;
 
 const initialState = {
   questions: [],
@@ -85,7 +86,7 @@ function reducer(state, action) {
         ...initialState,
         questions: state.questions,
         status: "ready",
-        highScore: state.highScore * 4,
+        highScore: state.highScore,
       };
     case "tick":
       return {

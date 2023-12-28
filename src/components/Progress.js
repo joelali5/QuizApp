@@ -15,7 +15,7 @@ export default function Progress({ index, questions, points, answer }) {
         </p>
         <p>
           <strong>
-            {points * 4} / {questions.length * 5}
+            {points} / {questions.length}
           </strong>{" "}
           Points
         </p>

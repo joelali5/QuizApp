@@ -1,6 +1,5 @@
 import Options from "./Options";
 import Progress from "./Progress";
-import ScoreBoard from "./ScoreBoard";
 
 export default function Question({
   question,
