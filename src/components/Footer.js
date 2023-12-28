@@ -1,3 +1,3 @@
 export default function Footer({ children }) {
-  return <footer>{children}</footer>;
+  return <footer className="footer">{children}</footer>;
 }

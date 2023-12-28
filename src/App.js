@@ -3,11 +3,11 @@ import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
 import { useReducer } from "react";
 import Main from "./components/Main";
-// import Loader from "./components/Loader";
 import Error from "./components/Error";
 import NextButton from "./components/NextButton";
 import Finished from "./components/Finished";
 import Footer from "./components/Footer";
+import Timer from "./components/Timer";
 
 const options = {
   "General Knowledge": 9,
@@ -27,6 +27,7 @@ const options = {
   Vehicles: 28,
   Gadgets: 30,
 };
+const SECS_PER_QUESTION = 30;
 
 const initialState = {
   questions: [],
@@ -37,12 +38,18 @@ const initialState = {
   answer: null,
   points: 0,
   highScore: 0,
+  timeRemaining: null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case "dataReceived":
-      return { ...state, questions: action.payload, status: "active" };
+      return {
+        ...state,
+        questions: action.payload,
+        status: "active",
+        timeRemaining: state.amount * SECS_PER_QUESTION,
+      };
     case "dataFailed":
       return { ...state, status: "error" };
     case "changeDifficulty":
@@ -80,6 +87,12 @@ function reducer(state, action) {
         status: "ready",
         highScore: state.highScore * 4,
       };
+    case "tick":
+      return {
+        ...state,
+        timeRemaining: state.timeRemaining - 1,
+        status: state.timeRemaining === 0 ? "finished" : state.status,
+      };
     default:
       throw new Error("Unknown action!");
   }
@@ -96,11 +109,10 @@ function App() {
     answer,
     points,
     highScore,
+    timeRemaining,
   } = state;
 
   const numQuestions = questions.length;
-
-  console.log(questions?.[index]);
 
   return (
     <div className="app">
@@ -127,6 +139,7 @@ function App() {
               highScore={highScore}
             />
             <Footer>
+              <Timer dispatch={dispatch} timeRemaining={timeRemaining} />
               <NextButton
                 questions={questions}
                 index={index}
