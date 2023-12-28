@@ -3,10 +3,11 @@
 
 :root {
   --dark-theme: #0c0b0b;
-  --color-light: #d1f0ee;
+  --color-light: #cbdbda;
   --category-bg: #313334;
   --color-primary: #2bbeb2;
   --font-family: "Roboto", sans-serif;
+  --color-grey: #9daaa3;
 }
 
 body {
@@ -16,9 +17,8 @@ body {
 }
 
 .app {
-  /* border: 1px solid var(--color-light); */
-  height: 100vh;
-  max-width: 60vw;
+  height: fit-content;
+  max-width: 650px;
   margin: 1.5em auto;
 }
 
@@ -26,31 +26,39 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60vw;
-  margin: 0 auto;
-  margin-top: 1.5em;
-  margin-bottom: 1em;
+  width: 80%;
+  margin: 1em auto;
 }
 
-img {
-  width: 100px;
-  margin-right: 2em;
+.app-title-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .app-title {
   color: var(--color-primary);
   font-family: "Codystar", sans-serif;
   font-size: 3.5rem;
+  margin: 0;
+}
+
+.sub-app-title {
+  font-size: 0.7rem;
+  color: var(--color-light);
+  align-self: flex-end;
+  font-family: var(--font-family);
+  font-style: italic;
 }
 
 .logo {
   filter: invert(59%) sepia(56%) saturate(508%) hue-rotate(126deg)
     brightness(95%) contrast(93%);
+  width: 100px;
+  margin-right: 2em;
 }
 
 .start {
   width: 90%;
-  /* border: 1px solid blue; */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -62,19 +70,19 @@ p {
 }
 
 .start-heading {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-family: var(--font-family);
   font-weight: 700;
 }
 
 .start-subheading {
-  font-size: 1.2rem;
+  font-size: 0.75rem;
+  color: var(--color-grey);
   margin-bottom: 2.6em;
   font-family: var(--font-family);
 }
 
 .category-container {
-  /* border: 1px solid red; */
   margin-top: 2em;
   display: flex;
   flex-wrap: wrap;
@@ -84,7 +92,7 @@ p {
 }
 
 .btn-category {
-  width: 24%;
+  width: 127px;
   height: content;
   margin-bottom: 1.8em;
   margin-top: 0.3em;
@@ -101,8 +109,8 @@ p {
 }
 
 .category-img {
-  width: 120px;
-  height: 120px;
+  width: 90px;
+  height: 90px;
   margin: 0 auto;
   margin-top: -35px;
   border-radius: 100px;
@@ -110,7 +118,8 @@ p {
 
 .category-name,
 .num-questions {
-  font-size: 0.9rem;
+  font-size: 0.65rem;
+  margin: 0;
   font-family: var(--font-family);
   font-weight: 700;
   text-align: left;
@@ -122,11 +131,15 @@ p {
   margin-bottom: 0.65em;
 }
 
+/* .question {
+  border: 1px solid red;
+} */
+
 .scoreboard {
   display: flex;
   justify-content: space-around;
   width: 61%;
-  padding: 1em 0;
+  padding: 0.3em 0;
   margin: 1em auto;
   border-radius: 20px;
   background-color: var(--category-bg);
@@ -161,12 +174,12 @@ span {
 }
 
 .question {
-  width: 50%;
-  margin: 2em auto;
-  padding: 2em 2em;
+  width: 55%;
+  margin: 1.5em auto;
+  padding: 1.5em;
   background-color: var(--category-bg);
   color: var(--color-light);
-  font-size: 2rem;
+  font-size: 0.85rem;
   border-radius: 16px;
 }
 
@@ -179,7 +192,7 @@ span {
 
 .btn-option {
   margin: 0.7em 0;
-  padding: 1em;
+  padding: 0.35em;
   text-align: left;
   font-size: 1.5rem;
   border-radius: 16px;
@@ -190,13 +203,12 @@ span {
 }
 
 .customize-quiz {
-  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
-  width: 30%;
+  width: 40%;
   margin: 0 auto;
   margin-bottom: 3em;
-  padding: 1.5em 3em;
+  padding: 0.65em 2.5em;
   background-color: var(--category-bg);
   border-radius: 10px;
 }
@@ -206,10 +218,11 @@ span {
   color: var(--category-bg);
   font-size: 1rem;
   border-radius: 10px;
-  padding: 0.7em 0.35em;
+  padding: 0.4em 0.35em;
   margin-right: 1.3em;
 }
-.num-questions-input:focus {
+.num-questions-input:focus,
+.select-difficulty:focus {
   outline: none;
 }
 
@@ -219,13 +232,9 @@ span {
 
 .select-difficulty {
   background: var(--color-light);
-  padding: 0 0.35em;
+  padding: 0 0.3em;
   font-size: 1rem;
   border-radius: 10px;
-}
-
-.select-difficulty:focus {
-  outline: 0;
 }
 
 .loader-container {
@@ -304,7 +313,8 @@ span {
   font-size: 1.4rem;
 }
 
-.btn {
+.btn,
+.timer {
   color: var(--color-primary);
   background-color: var(--category-bg);
   padding: 0.6em 1.5em;
@@ -340,4 +350,48 @@ span {
 .finished p {
   font-size: 1.5rem;
   margin-bottom: 2em;
+}
+
+@media only screen and (max-width: 600px) {
+  .customize-quiz {
+    width: 50%;
+  }
+
+  .btn-category {
+    width: 150px;
+  }
+}
+
+@media only screen and (max-width: 555px) {
+  .btn-category {
+    width: 190px;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .customize-quiz {
+    background: none;
+  }
+
+  .btn-category {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 2em;
+  }
+
+  .app-header {
+    width: 90%;
+  }
+
+  .start-heading {
+    font-size: 0.85rem;
+  }
+
+  .start-subheading {
+    font-size: 0.5rem;
+  }
+
+  .sub-app-title {
+    font-size: 0.5rem;
+  }
 }
