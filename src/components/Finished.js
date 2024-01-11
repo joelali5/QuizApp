@@ -1,9 +1,7 @@
-export default function Finished({
-  points,
-  numQuestions,
-  highScore,
-  dispatch,
-}) {
+import { useQuiz } from "../context/QuizContext";
+
+export default function Finished() {
+  const { points, numQuestions, highScore, dispatch } = useQuiz();
   const percent = Math.ceil((points / numQuestions) * 100);
   let pointsExpression;
   if (percent < 50)

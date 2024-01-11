@@ -1,4 +1,7 @@
-export default function ScoreBoard({ points, highScore }) {
+import { useQuiz } from "../context/QuizContext";
+
+export default function ScoreBoard() {
+  const { points, highScore } = useQuiz();
   return (
     <div className="scoreboard">
       <div className="highscore">

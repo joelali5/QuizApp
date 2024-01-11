@@ -1,4 +1,26 @@
-export default function Category({ options, amount, dispatch, difficulty }) {
+import { useQuiz } from "../context/QuizContext";
+
+const options = {
+  "General Knowledge": 9,
+  Film: 11,
+  Music: 12,
+  "Video Games": 15,
+  "Science & Nature": 17,
+  Computers: 18,
+  Mathematics: 19,
+  Sports: 21,
+  Geography: 22,
+  History: 23,
+  Politics: 24,
+  Art: 25,
+  Celebrities: 26,
+  Animals: 27,
+  Vehicles: 28,
+  Gadgets: 30,
+};
+
+export default function Category() {
+  const { amount, dispatch, difficulty } = useQuiz();
   const images = [
     "general-knowledge",
     "film",
