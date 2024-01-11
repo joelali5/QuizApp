@@ -1,26 +1,15 @@
+import { useQuiz } from "../context/QuizContext";
 import Options from "./Options";
 import Progress from "./Progress";
 
-export default function Question({
-  question,
-  dispatch,
-  answer,
-  questions,
-  points,
-  index,
-  highScore,
-}) {
+export default function Question() {
+  const { question } = useQuiz();
   return (
     <div>
       {/* <ScoreBoard points={points} highScore={highScore} /> */}
-      <Progress
-        index={index}
-        questions={questions}
-        points={points}
-        answer={answer}
-      />
+      <Progress />
       <h3 className="question">{question.question}</h3>
-      <Options question={question} dispatch={dispatch} answer={answer} />
+      <Options />
     </div>
   );
 }

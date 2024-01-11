@@ -1,4 +1,7 @@
-export default function CustomizeQuiz({ dispatch }) {
+import { useQuiz } from "../context/QuizContext";
+
+export default function CustomizeQuiz() {
+  const { dispatch } = useQuiz();
   return (
     <div className="customize-quiz">
       <input
