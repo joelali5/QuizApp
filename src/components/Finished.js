@@ -4,7 +4,7 @@ export default function Finished({
   highScore,
   dispatch,
 }) {
-  const percent = (points / numQuestions) * 100;
+  const percent = Math.ceil((points / numQuestions) * 100);
   let pointsExpression;
   if (percent < 50)
     pointsExpression = "Not so good score. You can do better 😔";

@@ -13,7 +13,7 @@ export default function ScoreBoard({ points, highScore }) {
         <p className="points-icon">🎉</p>
         <p className="scoreboard-scores">
           <span>Points</span>
-          <span>{points * 4}</span>
+          <span>{points}</span>
         </p>
       </div>
     </div>

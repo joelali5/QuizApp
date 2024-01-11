@@ -109,6 +109,8 @@ p {
 }
 
 .category-img {
+  filter: invert(93%) sepia(13%) saturate(159%) hue-rotate(127deg)
+    brightness(92%) contrast(91%);
   width: 90px;
   height: 90px;
   margin: 0 auto;
