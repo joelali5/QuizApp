@@ -14,6 +14,7 @@ const initialState = {
   points: 0,
   highScore: 0,
   timeRemaining: null,
+  multipleOptionsArray: [],
 };
 
 function reducer(state, action) {
@@ -68,6 +69,8 @@ function reducer(state, action) {
         timeRemaining: state.timeRemaining - 1,
         status: state.timeRemaining === 0 ? "finished" : state.status,
       };
+    case "shuffleOptions":
+      return { ...state, multipleOptionsArray: action.payload };
     default:
       throw new Error("Unknown action!");
   }
@@ -85,6 +88,7 @@ function QuizProvider({ children }) {
       points,
       highScore,
       timeRemaining,
+      multipleOptionsArray,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -105,6 +109,7 @@ function QuizProvider({ children }) {
         timeRemaining,
         numQuestions,
         question,
+        multipleOptionsArray,
 
         dispatch,
       }}

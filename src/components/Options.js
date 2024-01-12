@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { useQuiz } from "../context/QuizContext";
 
 export default function Options() {
-  const { question, dispatch, answer } = useQuiz();
+  const { question, dispatch, answer, multipleOptionsArray } = useQuiz();
   let booleanOptionsArray = [];
-  let multipleOptionsArray = [];
 
   if (question.type === "boolean") {
     booleanOptionsArray = [
@@ -12,12 +12,21 @@ export default function Options() {
     ];
   }
 
-  if (question.type === "multiple") {
-    multipleOptionsArray = [
-      question.correct_answer,
-      ...question.incorrect_answers,
-    ].sort((a, b) => a - b);
-  }
+  const shuffle = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
+
+  useEffect(() => {
+    if (question.type === "multiple") {
+      dispatch({
+        type: "shuffleOptions",
+        payload: shuffle([
+          ...question.incorrect_answers,
+          question.correct_answer,
+        ]),
+      });
+    }
+  }, [dispatch, question]);
 
   const hasAnswered = answer !== null;
 
